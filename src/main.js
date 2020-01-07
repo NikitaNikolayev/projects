@@ -249,9 +249,9 @@ ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
 
-app.on('ready', () => {
-  alert('note');
-});
+// app.on('ready', () => {
+//   alert('note')
+// });
 
 autoUpdater.on('update-available', () => {
   mainWindow.webContents.send('update_available');
