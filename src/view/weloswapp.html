@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>微骆-单窗通</title>
+    <link rel="stylesheet" href="../../release/dist/style.css" />
+  </head>
+
+  <body style="background: #f0f2f5">
+    <div id="mount" style="height: 100%" />
+    <div id="notification" class="hidden">
+      <p id="message"></p>
+      <button id="close-button" onClick="closeNotification()">
+        Close
+      </button>
+      <button id="restart-button" onClick="restartApp()" class="hidden">
+        Restart
+      </button>
+    </div>
+    <script defer src="../../release/dist/prod.js"></script>
+    <script>
+      const notification = document.getElementById('notification');
+      const message = document.getElementById('message');
+      const restartButton = document.getElementById('restart-button');
+      ipcRenderer.on('update_available', () => {
+        ipcRenderer.removeAllListeners('update_available');
+        message.innerText = 'A new update is available. Downloading now...';
+        notification.classList.remove('hidden');
+      });
+      ipcRenderer.on('update_downloaded', () => {
+        ipcRenderer.removeAllListeners('update_downloaded');
+        message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+        restartButton.classList.remove('hidden');
+        notification.classList.remove('hidden');
+      });
+      function closeNotification() {
+        notification.classList.add('hidden');
+      }
+      function restartApp() {
+        ipcRenderer.send('restart_app');
+      }
+    </script>
+  </body>
+</html>

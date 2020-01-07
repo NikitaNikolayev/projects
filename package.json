@@ -1,0 +1,123 @@
+{
+  "name": "electron-swapp",
+  "version": "1.6.3",
+  "description": "an Electron application for china customs singlewindow website",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node webpack/start",
+    "release": "webpack --config=webpack/appconf.js --env=prod & webpack --config=webpack/mainconf.js  && electron-builder"
+  },
+  "build": {
+    "productName": "SWT",
+    "appId": "tech.welogix.swapp",
+    "files": [
+      "release/dist/",
+      "src/view/weloswapp.html",
+      "src/main.prod.js",
+      "swClient/",
+      "src/rendererIpc/"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "publish": null,
+    "build": "electron-builder build --win --publish never"
+  },
+  "build32": {
+    "productName": "SWT",
+    "appId": "tech.welogix.swapp",
+    "files": [
+      "release/dist/",
+      "src/view/weloswapp.html",
+      "src/main.prod.js",
+      "swClient/",
+      "src/rendererIpc/"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "publish": null
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GavrilGarin/projects"
+  },
+  "keywords": [
+    "Electron",
+    "swapp.singlewindow.",
+    "ocx login",
+    "autofill",
+    "scraping",
+    "cusdecl"
+  ],
+  "author": "The Welgoix Developers",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "electron": "^1.8.4",
+    "electron-builder": "^20.8.1",
+    "electron-prebuilt": "^1.4.13",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0"
+  },
+  "dependencies": {
+    "@scoop/bunyan": "^2.0.2",
+    "@sentry/browser": "^5.10.2",
+    "antd": "^3.26.1",
+    "chokidar": "^3.3.0",
+    "classnames": "^2.2.6",
+    "core-js": "^3.4.8",
+    "css-loader": "^3.3.0",
+    "electron-updater": "2.21.4",
+    "fivebeans": "^1.5.0",
+    "js-yaml": "^3.13.1",
+    "mini-css-extract-plugin": "^0.8.0",
+    "moment": "^2.24.0",
+    "net-socket-reconnect": "0.0.9",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-resizable": "^1.10.1",
+    "superagent": "^5.1.2",
+    "terser-webpack-plugin": "^1.4.2",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "deploy": "electron-builder build --win --publish always"
+}
