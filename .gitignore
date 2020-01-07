@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+Thumbs.db
+*.log
+/temp
+release
+.vscode
+weloswapp.json
+swconfig.yml
+src/main.prod.js
+src/main.prod.js.map
+package-lock.json
+electron-builder.yml
