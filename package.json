@@ -1,6 +1,6 @@
 {
   "name": "electron-swapp",
-  "version": "1.6.3",
+  "version": "1.0.1",
   "description": "an Electron application for china customs singlewindow website",
   "main": "src/main.js",
   "scripts": {
