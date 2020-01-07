@@ -5,7 +5,9 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node webpack/start",
-    "release": "webpack --config=webpack/appconf.js --env=prod & webpack --config=webpack/mainconf.js  && electron-builder"
+    "release": "webpack --config=webpack/appconf.js --env=prod & webpack --config=webpack/mainconf.js  && electron-builder",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
   },
   "build": {
     "productName": "SWT",
@@ -15,7 +17,9 @@
       "src/view/weloswapp.html",
       "src/main.prod.js",
       "swClient/",
-      "src/rendererIpc/"
+      "src/rendererIpc/",
+      "./build/**/*",
+      "src/main.js"
     ],
     "win": {
       "target": [
@@ -101,7 +105,7 @@
     "classnames": "^2.2.6",
     "core-js": "^3.4.8",
     "css-loader": "^3.3.0",
-    "electron-updater": "2.21.4",
+    "electron-updater": "4.0.0",
     "fivebeans": "^1.5.0",
     "js-yaml": "^3.13.1",
     "mini-css-extract-plugin": "^0.8.0",
@@ -118,9 +122,5 @@
     "webpack-cli": "^3.3.10",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
-  },
-  "script": {
-    "build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish always"
   }
 }
