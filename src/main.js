@@ -4,6 +4,7 @@ const path = require('path');
 const url = require('url');
 const { fork } = require('child_process');
 const syncSingleWindowJob = require('./timerSyncJob/syncSWData');
+const { autoUpdater } = require('electron-updater');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -23,8 +24,9 @@ const DEFAULT_USERCONF = {
   syncjob_config: DEFAULT_SYNCJOB_CONF,
 };
 
-const { autoUpdater } = require('electron-updater');
 global.g_sharedUserConf = DEFAULT_USERCONF;
+
+autoUpdater.checkForUpdatesAndNotify();
 
 function createWindow() {
   const mainWindowOpt = {
@@ -238,14 +240,6 @@ ipcMain.on('swapp-channel', (ev, arg) => {
   }
 });
 
-autoUpdater.checkForUpdatesAndNotify();
-
-autoUpdater.on('update-available', () => {
-  mainWindow.webContents.send('update_available');
-});
-autoUpdater.on('update-downloaded', () => {
-  mainWindow.webContents.send('update_downloaded');
-});
 
 ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
@@ -253,4 +247,15 @@ ipcMain.on('app_version', (event) => {
 
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
+});
+
+app.on('ready', () => {
+  alert('note');
+});
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
 });
